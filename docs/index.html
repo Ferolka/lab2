@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>NIT demo</title>
+	<title>PLease</title>
 
 	<link rel="stylesheet" href="./css/main.css">
-			<!-- <script src="../index.js"></script> -->
+
 		<script src="./js/main.js"></script>
 
-	
+
  
  <!-- <script src="../jquery.min.js"></script>
 	<script src="../handlebars.min.js"></script> -->
@@ -17,15 +17,197 @@
 </head>
 <body>
 	
-	<h1 class="text-center">Demo Shop</h1>
+	<h1 class="text-center">Better than Rozetka</h1>
+    <label class="link" for="hider" id="clickme">Filters</label>
+    <input type="checkbox" id="hider">
+    <div class="content text-center">
+    <div class="filters" >
+        <form>
 
-	<div class="container">
+
+                <label><input type="checkbox" name="filtr" value="apple" onclick="validForm(this.checked,1)">Apple</label>
+                <label><input type="checkbox" name="filtr" value="samsung" onclick="validForm(this.checked,2)">Samsung</label>
+                <label><input type="checkbox" name="filtr" value="Xiomi" onclick="validForm(this.checked,3)">Xiomi</label>
+
+
+
+                <label><input type="checkbox" value="Smartphnoe" name="filtr" onclick="validForm(this.checked,4)">Smartphones</label>
+                <label><input type="checkbox" value="Notebooks" name="filtr" onclick="validForm(this.checked,5)">Notebooks</label>
+
+
+
+            <button>Clear filters</button>
+
+        </form>
+
+    </div>
+    </div>
+	<div class="container" id="con">
 		<div class="row product-grid">
 
 		</div>
 	</div>
+    <div class="single" id="sin">
 
-	
+    </div>
+    <div id="bag">
+        <button id="backFromBag" onclick="backOn()">Back</button>
+        <div id="choosen"></div>
+        <div id="contact">
+            <form action="action" method="post" class="payment-form">
+                <legend>Contact information</legend>
+                <label>Name</label>
+                <input type="Text" name="Second name" maxlength="20" tabindex="2" required>
+                <br>
+                <label for="phone">Enter your phone number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                <br>
+                <label>Email</label>
+                <input type="Text" name="mail">
+                <br>
+                <input type="submit" name="submit" value="Send answer">
+            </form>
+        </div>
+    </div>
+    <script>
+        // $(".payment-form").submit(function () {
+        //     alert($("#textinput").val()); //0
+        //     $("#textinput").val('new value');
+        //     alert($("#textinput").val()); //new value
+        //
+        //     return true; //отправляете ваш submit
+        // });
+        // var myKeyVals = { A1984 : 1, A9873 : 5, A1674 : 2, A8724 : 1, A3574 : 3, A1165 : 5 }
+        //
+        //
+        //
+        // var saveData = $.ajax({
+        //     type: 'POST',
+        //     url: "someaction.do?action=saveData",
+        //     data: myKeyVals,
+        //     dataType: "text",
+        //     success: function(resultData) { alert("Save Complete") }
+        // });
+        // saveData.error(function() { alert("Something went wrong"); });
+        function backOn(){
+            document.getElementById("bag").style.display = "none";
+            document.getElementById("clickme").style.display ="block";
+            for(var j=1;j<10;j++){
+
+                document.getElementById(j).style.display = "flex";
+            }
+        }
+
+        function buy(n){
+            // console.log(document.getElementById("b"+n));
+            // document.getElementById("sin").style.display ="none";
+                document.getElementById("b+"+n).style.display = "none";
+
+                document.getElementById("bag").style.display = "block";
+            }
+        function single(n) {
+            for(var j=1;j<10;j++){
+
+                document.getElementById(j).style.display = "none";
+            }
+            // for(var j=1;j<10;j++){
+            //
+            //     document.getElementById("b"+j).style.display = "none";
+            // }
+            // document.getElementById("sin").style.display ="block";
+            document.getElementById("b+"+n).style.display ="block";
+            document.getElementById("clickme").style.display ="none";
+        }
+        function back(n) {
+            document.getElementById("clickme").style.display ="block";
+            for(var j=1;j<10;j++){
+
+                document.getElementById(j).style.display = "flex";
+            }
+            document.getElementById("b+"+n).style.display ="none";
+        }
+        function validForm(f,n) {
+            for(var j=1;j<10;j++){
+                document.getElementById(j).style.display = "flex";
+            }
+            if(f==true) {
+                // document.getElementsById("1").style.display = "none";
+                if (n == 1) {
+
+                    document.getElementById(n).style.display = "none";
+                    document.getElementById(2).style.display = "none";
+                    for (var i = 5; i < 10; i++) {
+                        document.getElementById(i).style.display = "none";
+                    }
+                }
+                if(n==2){
+                    for (var i = 1; i < 5; i++) {
+                        document.getElementById(i).style.display = "none";
+                    }
+                    document.getElementById(6).style.display = "none";
+                    for (var i = 8; i < 10; i++) {
+                        document.getElementById(i).style.display = "none";
+                    }
+                }
+                if(n==3){
+                    for (var i = 3; i < 8; i++) {
+                        document.getElementById(i).style.display = "none";
+                    }
+                }
+                if(n==4){
+                    document.getElementById("4").style.display = "none";
+                    document.getElementById("6").style.display = "none";
+                    document.getElementById("8").style.display = "none";
+                    document.getElementById("9").style.display = "none";
+                }
+                if(n==5){
+                    for (var i = 1; i < 4; i++) {
+                        document.getElementById(i).style.display = "none";
+                    }
+                    document.getElementById("5").style.display = "none";
+                    document.getElementById("7").style.display = "none";
+                }
+
+            }
+            else {
+                if (n == 1) {
+                    document.getElementById(2).style.display = "flex";
+                    for (var i = 5; i < 10; i++) {
+                        document.getElementById(i).style.display = "flex";
+                    }
+                    document.getElementById(n).style.display = "flex";
+                }
+                if(n==2){
+                    for (var i = 1; i < 5; i++) {
+                        document.getElementById(i).style.display = "flex";
+                    }
+                    document.getElementById(6).style.display = "flex";
+                    for (var i = 8; i < 10; i++) {
+                        document.getElementById(i).style.display = "flex";
+                    }
+                }
+                if(n==3){
+                    for (var i = 3; i < 8; i++) {
+                        document.getElementById(i).style.display = "flex";
+                    }
+                }
+                if(n==4){
+                    document.getElementById("4").style.display = "flex";
+                    document.getElementById("6").style.display = "flex";
+                    document.getElementById("8").style.display = "flex";
+                    document.getElementById("9").style.display = "flex";
+                }
+                if(n==5){
+                    for (var i = 1; i < 4; i++) {
+                        document.getElementById(i).style.display = "flex";
+                    }
+                    document.getElementById("4").style.display = "flex";
+                    document.getElementById("6").style.display = "flex";
+                }
+            }
+        }
+    </script>
+
 </body>
 
 </html>
