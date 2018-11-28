@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>PLease</title>
+	<title>Style or stolen shop</title>
 
 	<link rel="stylesheet" href="./css/main.css">
 
@@ -17,30 +17,43 @@
 </head>
 <body>
 	
-	<h1 class="text-center">Better than Rozetka</h1>
+	<h1 class="text-center">Steel shop</h1>
+    <div id="up">
+    <button id="bagBut" onclick="buy()">Bag</button>
+
+
     <label class="link" for="hider" id="clickme">Filters</label>
+
     <input type="checkbox" id="hider">
-    <div class="content text-center">
-    <div class="filters" >
-        <form>
+
+    <div class="content filters">
+        <label><button onclick="validForm(true,1)"></button>Apple</label>
+        <label><button onclick="validForm(true,2)"></button>Samsung</label>
+        <label><button onclick="validForm(true,3)"></button>Xiomi</label>
+        <label><button onclick="validForm(true,4)"></button>Smartphones</label>
+        <label><button onclick="validForm(true,5)"></button>Notebooks</label>
+        <!--<form>-->
 
 
-                <label><input type="checkbox" name="filtr" value="apple" onclick="validForm(this.checked,1)">Apple</label>
-                <label><input type="checkbox" name="filtr" value="samsung" onclick="validForm(this.checked,2)">Samsung</label>
-                <label><input type="checkbox" name="filtr" value="Xiomi" onclick="validForm(this.checked,3)">Xiomi</label>
+                <!--<label><input type="checkbox" name="filtr" value="apple" onclick="validForm(this.checked,1)">Apple</label>-->
+
+                <!--<label><input type="checkbox" name="filtr" value="samsung" onclick="validForm(this.checked,2)">Samsung</label>-->
+                <!--<label><input type="checkbox" name="filtr" value="Xiomi" onclick="validForm(this.checked,3)">Xiomi</label>-->
 
 
 
-                <label><input type="checkbox" value="Smartphnoe" name="filtr" onclick="validForm(this.checked,4)">Smartphones</label>
-                <label><input type="checkbox" value="Notebooks" name="filtr" onclick="validForm(this.checked,5)">Notebooks</label>
+                <!--<label><input type="checkbox" value="Smartphnoe" name="filtr" onclick="validForm(this.checked,4)">Smartphones</label>-->
+                <!--<label><input type="checkbox" value="Notebooks" name="filtr" onclick="validForm(this.checked,5)">Notebooks</label>-->
 
 
 
-            <button>Clear filters</button>
 
-        </form>
 
+        <!--</form>-->
+
+        <button id="clBut" onclick="cl()">Clear filters</button>
     </div>
+
     </div>
 	<div class="container" id="con">
 		<div class="row product-grid">
@@ -51,47 +64,69 @@
 
     </div>
     <div id="bag">
-        <button id="backFromBag" onclick="backOn()">Back</button>
-        <div id="choosen"></div>
+        <button id="backFromBag" class="back" onclick="backOn()">Back</button>
+        <br>
+        <div class="choosen"></div>
+        <br>
         <div id="contact">
             <form action="action" method="post" class="payment-form">
                 <legend>Contact information</legend>
                 <label>Name</label>
-                <input type="Text" name="Second name" maxlength="20" tabindex="2" required>
+                <input type="Text" name="Second name" id="sec" maxlength="20" tabindex="2" required>
                 <br>
-                <label for="phone">Enter your phone number:</label>
+                <label for="phone" required>Phone:</label>
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
                 <br>
                 <label>Email</label>
-                <input type="Text" name="mail">
+                <input type="email" name="mail" id="mal" required>
                 <br>
-                <input type="submit" name="submit" value="Send answer">
+                <!--<button onclick="pay()">pay</button>-->
+                <input class="payment-form" id="send" onclick="pay()" type="submit" value="Send requast">
             </form>
         </div>
     </div>
     <script>
-        // $(".payment-form").submit(function () {
-        //     alert($("#textinput").val()); //0
-        //     $("#textinput").val('new value');
-        //     alert($("#textinput").val()); //new value
-        //
-        //     return true; //отправляете ваш submit
-        // });
-        // var myKeyVals = { A1984 : 1, A9873 : 5, A1674 : 2, A8724 : 1, A3574 : 3, A1165 : 5 }
-        //
-        //
-        //
-        // var saveData = $.ajax({
-        //     type: 'POST',
-        //     url: "someaction.do?action=saveData",
-        //     data: myKeyVals,
-        //     dataType: "text",
-        //     success: function(resultData) { alert("Save Complete") }
-        // });
-        // saveData.error(function() { alert("Something went wrong"); });
+
+        function pay() {
+            var final = "";
+            final += "token=fjdzHdL7_TK1mZUShiQd";
+            final += "&name=" + document.getElementById("sec") + "&phone=" + document.getElementById("phone") + "&email=" + document.getElementById("mal");
+
+            var flag = false;
+            for (var j = 1; j < 10; j++) {
+                var con = +document.getElementById("quan+" + j).innerHTML
+                if (con > 0) {
+                    final += "&product[" + j + "]=" + con;
+                    flag = true;
+                }
+                console.log(con);
+            }
+
+            if (flag) {
+                var saveData = $.ajax({
+                    type: 'POST',
+                    url: "https://nit.tron.net.ua/api/order/add",
+                    // data: myKeyVals,
+                    data: final,
+                    dataType: "text",
+                    success: function (resultData) {
+                        alert("Send Complete")
+                    }
+                });
+                saveData.error(function () {
+                    alert("Something went wrong");
+                });
+
+            }
+            else{
+                alert("No products in bag")
+            }
+            return;
+        }
         function backOn(){
             document.getElementById("bag").style.display = "none";
-            document.getElementById("clickme").style.display ="block";
+            document.getElementById("up").style.display ="block";
+            // document.getElementById("clickme").style.display ="block";
             for(var j=1;j<10;j++){
 
                 document.getElementById(j).style.display = "flex";
@@ -100,11 +135,50 @@
 
         function buy(n){
             // console.log(document.getElementById("b"+n));
-            // document.getElementById("sin").style.display ="none";
-                document.getElementById("b+"+n).style.display = "none";
+            for(var j=1;j<10;j++){
+
+                document.getElementById(j).style.display = "none";
+            }
+            document.getElementById("up").style.display ="none";
+            if(n==null){
+                for(var j=1;j<10;j++) {
+
+                    document.getElementById(j).style.display = "none";
+                }
+            }else {
+                document.getElementById("b+" + n).style.display = "none";
+                // console.log( $('#quan+' +n).attr("data-count"));
+               var con=+ document.getElementById("quan+"+n).innerHTML;
+               // $(this).data("id") // will return the number 123
+                con++;
+                console.log(con);
+                document.getElementById("quan+"+n).innerHTML=con;
+
+
+
+                document.getElementById("inB+" + n).style.display = "block";
+                // console.log( $(this.('#quan+' +n)).attr("data-count"));
+            }
 
                 document.getElementById("bag").style.display = "block";
             }
+            function plus(n) {
+
+                var con=+ document.getElementById("quan+"+n).innerHTML;
+
+                con++;
+                document.getElementById("quan+"+n).innerHTML=con;
+            }
+        function minus(n) {
+
+            var con=+ document.getElementById("quan+"+n).innerHTML;
+
+            con--;
+           if(con==0){
+               document.getElementById("inB+" + n).style.display = "none";
+           }else
+            document.getElementById("quan+"+n).innerHTML=con;
+        }
         function single(n) {
             for(var j=1;j<10;j++){
 
@@ -116,10 +190,11 @@
             // }
             // document.getElementById("sin").style.display ="block";
             document.getElementById("b+"+n).style.display ="block";
-            document.getElementById("clickme").style.display ="none";
+            document.getElementById("up").style.display ="none";
+
         }
         function back(n) {
-            document.getElementById("clickme").style.display ="block";
+            document.getElementById("up").style.display ="block";
             for(var j=1;j<10;j++){
 
                 document.getElementById(j).style.display = "flex";
@@ -206,8 +281,17 @@
                 }
             }
         }
-    </script>
+        function cl() {
+            for(var j=1;j<10;j++){
 
+                document.getElementById(j).style.display = "flex";
+            }
+        }
+    </script>
+<footer>
+
+    <div>Copyright@Kovalenko Andry 2018</div>
+</footer>
 </body>
 
 </html>
