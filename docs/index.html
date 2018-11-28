@@ -121,7 +121,9 @@
                 // saveData.error(function () {
                 //     alert("Something went wrong");
                 // });
-                document.location.href = "index.html";
+
+                event.preventDefault();
+                // document.location.href = "index.html";
             }
             else{
                 alert("No products in bag")
