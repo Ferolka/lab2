@@ -90,16 +90,16 @@
         function pay() {
             var final = "";
             final += "token=fjdzHdL7_TK1mZUShiQd";
-            final += "&name=" + document.getElementById("sec") + "&phone=" + document.getElementById("phone") + "&email=" + document.getElementById("mal");
+            final += "&name=" + document.getElementById("sec").innerHTML + "&phone=" + document.getElementById("phone").innerHTML + "&email=" + document.getElementById("mal").innerHTML;
 
             var flag = false;
             for (var j = 1; j < 10; j++) {
-                var con = +document.getElementById("quan+" + j).innerHTML
+                var con = +document.getElementById("quan+" + j).innerHTML;
                 if (con > 0) {
                     final += "&product[" + j + "]=" + con;
                     flag = true;
                 }
-                console.log(con);
+                //console.log(con);
             }
 
             if (flag) {
@@ -116,12 +116,12 @@
                 saveData.error(function () {
                     alert("Something went wrong");
                 });
-
+                // location.reload();
             }
             else{
                 alert("No products in bag")
             }
-            return;
+
         }
         function backOn(){
             document.getElementById("bag").style.display = "none";
