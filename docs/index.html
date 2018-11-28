@@ -89,8 +89,9 @@
 
         function pay() {
             var final = "";
+            var name=document.getElementById("sec").value;
             final += "token=fjdzHdL7_TK1mZUShiQd";
-            final += "&name=" + document.getElementById("sec").innerHTML + "&phone=" + document.getElementById("phone").innerHTML + "&email=" + document.getElementById("mal").innerHTML;
+            final += "&name=" + document.getElementById("sec").value + "&phone=" + document.getElementById("phone").value + "&email=" + document.getElementById("mal").value;
 
             var flag = false;
             for (var j = 1; j < 10; j++) {
@@ -101,7 +102,7 @@
                 }
                 //console.log(con);
             }
-
+            console.log(final);
             if (flag) {
                 var saveData = $.ajax({
                     type: 'POST',
@@ -113,10 +114,10 @@
                         alert("Send Complete")
                     }
                 });
-                saveData.error(function () {
-                    alert("Something went wrong");
-                });
-                // location.reload();
+                // saveData.error(function () {
+                //     alert("Something went wrong");
+                // });
+                document.location.href = "index.html";
             }
             else{
                 alert("No products in bag")
