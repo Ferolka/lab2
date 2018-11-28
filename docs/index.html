@@ -97,7 +97,7 @@
             for (var j = 1; j < 10; j++) {
                 var con = +document.getElementById("quan+" + j).innerHTML;
                 if (con > 0) {
-                    final += "&product[" + j + "]=" + con;
+                    final += "&products[" + j + "]=" + con;
                     flag = true;
                 }
                 //console.log(con);
@@ -106,13 +106,17 @@
             if (flag) {
                 var saveData = $.ajax({
                     type: 'POST',
-                    url: "https://nit.tron.net.ua/api/order/add",
+                    url: 'https://nit.tron.net.ua/api/order/add',
                     // data: myKeyVals,
                     data: final,
                     dataType: "text",
-                    success: function (resultData) {
-                        alert("Send Complete")
-                    }
+                    success: function(data)
+                    {
+                        console.log(data); // show response from the php script.
+                    },
+                    error: function(xhr){
+                        console.log("An error occured: " + xhr.status + " " + xhr.statusText);
+                    },
                 });
                 // saveData.error(function () {
                 //     alert("Something went wrong");
